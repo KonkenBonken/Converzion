@@ -6,16 +6,21 @@ const groups = [
 		{
 			name: 'foot',
 			unit: 'ft',
-			fromRoot: i => i * 3.2808399,
-			toRoot: i => i / 3.2808399
+			multiply: 3.2808399
 		},
 		{
 			name: 'inch',
 			unit: 'in',
-			fromRoot: i => i * 39.3700788,
-			toRoot: i => i / 39.3700788
+			multiply: 39.3700788,
 		}
 	]
 ];
+
+for (const group of groups)
+	for (const unit of group)
+		if (unit.multiply) {
+			unit.fromRoot = x => x * unit.multiply;
+			unit.toRoot = x => x / unit.multiply;
+		}
 
 export default groups;
