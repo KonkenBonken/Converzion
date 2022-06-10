@@ -1,6 +1,7 @@
 const groups = [
 	['length',
-		['metric', {
+		'metric',
+		{
 			name: 'KiloMeter',
 			multiply: 1e-3
 		}, {
@@ -15,8 +16,10 @@ const groups = [
 		}, {
 			name: 'MilliMeter',
 			multiply: 1e3
-		}],
-		['imperial', {
+		},
+
+		'imperial',
+		{
 			name: 'MIle',
 			multiply: 6.21371192e-4
 		}, {
@@ -28,18 +31,21 @@ const groups = [
 		}, {
 			name: 'INch',
 			multiply: 39.3700788,
-		}],
-		[{
+		},
+
+		'astronomy units',
+		{
 			name: 'Light-Year',
 			multiply: 1.05702341e-16
 		}, {
 			name: 'astronomical unit',
 			multiply: 6.68458712e-12,
 			unit: 'AU'
-		}]
+		}
 	],
 	['mass',
-		['metric', {
+		'metric',
+		{
 			name: 'GigaTonne',
 			multiply: 1e15,
 			unit: 'Gt'
@@ -69,8 +75,10 @@ const groups = [
 		}, {
 			name: 'PicoGram',
 			multiply: 1e-12
-		}],
-		['imperial', {
+		},
+
+		'imperial',
+		{
 			name: 'us ton',
 			multiply: 907e3,
 			unit: 'US ton'
@@ -86,36 +94,37 @@ const groups = [
 			name: 'ounce',
 			multiply: 28.35 ** -1,
 			unit: 'oz'
-		}]
+		}
 	],
-	[{
-		name: 'celsius',
-		isRoot: true,
-		unit: '°C'
-	}, {
-		name: 'fahrenheit',
-		fromRoot: c => c * 1.8 + 32,
-		toRoot: f => (f - 32) / 1.8,
-		unit: '°F'
-	}, {
-		name: 'kelvin',
-		fromRoot: c => c + 273.15,
-		toRoot: k => k - 273.15,
-		unit: 'K'
-	}, {
-		name: 'newton',
-		multiply: .33 ** -1,
-		unit: '°N'
-	}, {
-		name: 'rankine',
-		fromRoot: c => (c + 273.15) / 1.8,
-		toRoot: r => r * 1.8 - 273.15,
-		unit: '°R'
-	}]
+	['temperature',
+		{
+			name: 'celsius',
+			isRoot: true,
+			unit: '°C'
+		}, {
+			name: 'fahrenheit',
+			fromRoot: c => c * 1.8 + 32,
+			toRoot: f => (f - 32) / 1.8,
+			unit: '°F'
+		}, {
+			name: 'kelvin',
+			fromRoot: c => c + 273.15,
+			toRoot: k => k - 273.15,
+			unit: 'K'
+		}, {
+			name: 'newton',
+			multiply: .33 ** -1,
+			unit: '°N'
+		}, {
+			name: 'rankine',
+			fromRoot: c => (c + 273.15) / 1.8,
+			toRoot: r => r * 1.8 - 273.15,
+			unit: '°R'
+		}
+	]
 ];
 
 for (let group of groups) {
-	group = group.flat();
 	for (const unit of group) {
 		if (typeof unit === 'string') continue;
 		if (unit.multiply) {
