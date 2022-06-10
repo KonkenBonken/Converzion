@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Unit from './Unit';
+import Unit from './Unit.jsx';
 
 class Group extends Component {
   constructor(props) {
