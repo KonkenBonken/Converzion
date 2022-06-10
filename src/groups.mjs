@@ -1,6 +1,6 @@
 const groups = [
-	[
-		[{
+	['length',
+		['metric', {
 			name: 'KiloMeter',
 			multiply: 1e-3
 		}, {
@@ -16,7 +16,7 @@ const groups = [
 			name: 'MilliMeter',
 			multiply: 1e3
 		}],
-		[{
+		['imperial', {
 			name: 'MIle',
 			multiply: 6.21371192e-4
 		}, {
@@ -38,8 +38,8 @@ const groups = [
 			unit: 'AU'
 		}]
 	],
-	[
-		[{
+	['mass',
+		['metric', {
 			name: 'GigaTonne',
 			multiply: 1e15,
 			unit: 'Gt'
@@ -70,7 +70,7 @@ const groups = [
 			name: 'PicoGram',
 			multiply: 1e-12
 		}],
-		[{
+		['imperial', {
 			name: 'us ton',
 			multiply: 907e3,
 			unit: 'US ton'
@@ -117,6 +117,7 @@ const groups = [
 for (let group of groups) {
 	group = group.flat();
 	for (const unit of group) {
+		if (typeof unit === 'string') continue;
 		if (unit.multiply) {
 			unit.fromRoot = x => x * unit.multiply;
 			unit.toRoot = x => x / unit.multiply;

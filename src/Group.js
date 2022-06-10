@@ -21,8 +21,14 @@ class Group extends Component {
   render() {
     const elements = [];
     for (let unitData of this.props.children) {
-      if (Array.isArray(unitData)) {
-        const innerEls = unitData.map(unitData => this.dataToEl(unitData));
+      if (typeof unitData === 'string')
+        elements.push(<h3>{unitData}</h3>)
+      else if (Array.isArray(unitData)) {
+        const innerEls = unitData.map(unitData => {
+          if (typeof unitData === 'string')
+            return (<h4>{unitData}</h4>);
+          else return this.dataToEl(unitData)
+        });
         elements.push(<div className='innerGroup' key={unitData.map(u => u.unit).join('<')}>{innerEls}</div>)
       } else
         elements.push(this.dataToEl(unitData))
