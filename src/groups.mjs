@@ -1,34 +1,28 @@
 const groups = [
 	[
 		[{
-				name: 'meter',
-				unit: 'm',
+				name: 'Meter',
 				isRoot: true
 			},
 			{
-				name: 'decimeter',
-				unit: 'dm',
+				name: 'DeciMeter',
 				multiply: 10
 			},
 			{
-				name: 'centimeter',
-				unit: 'cm',
+				name: 'CentiMeter',
 				multiply: 100
 			},
 			{
-				name: 'millimeter',
-				unit: 'mm',
+				name: 'MilliMeter',
 				multiply: 1000
 			}
 		],
 		[{
-				name: 'foot',
-				unit: 'ft',
+				name: 'FooT',
 				multiply: 3.2808399
 			},
 			{
-				name: 'inch',
-				unit: 'in',
+				name: 'INch',
 				multiply: 39.3700788,
 			}
 		]
@@ -42,6 +36,9 @@ for (let group of groups) {
 			unit.fromRoot = x => x * unit.multiply;
 			unit.toRoot = x => x / unit.multiply;
 		}
+		if (!unit.unit)
+			unit.unit = unit.name.replace(/[^A-Z]/g, '').toLowerCase();
+		unit.name = unit.name.toLowerCase();
 		unit.isRoot = !!unit.isRoot;
 	}
 }
