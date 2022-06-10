@@ -13,21 +13,19 @@ class Group extends Component {
     this.setState({ rootValue });
   }
 
-  dataToEl(unitData, isRoot) {
-    const { name, unit, fromRoot, toRoot } = unitData;
+  dataToEl(unitData) {
+    const { name, unit, fromRoot, toRoot, isRoot } = unitData;
     return (<Unit key={name} name={name} unit={unit} fromRoot={fromRoot} toRoot={toRoot} isRoot={isRoot} setRoot={this.setRoot} rootValue={this.state.rootValue}/>);
   }
 
   render() {
     const elements = [];
-    let isRoot = true;
     for (let unitData of this.props.children) {
       if (Array.isArray(unitData)) {
-        const innerEls = unitData.map(unitData => this.dataToEl(unitData, isRoot));
+        const innerEls = unitData.map(unitData => this.dataToEl(unitData));
         elements.push(<div className='innerGroup' key={unitData.map(u => u.unit).join('<')}>{innerEls}</div>)
       } else
-        elements.push(this.dataToEl(unitData, isRoot))
-      isRoot = false;
+        elements.push(this.dataToEl(unitData))
     }
 
     return (<div className='group'>{elements}</div>);

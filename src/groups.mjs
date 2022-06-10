@@ -2,7 +2,8 @@ const groups = [
 	[
 		[{
 				name: 'meter',
-				unit: 'm'
+				unit: 'm',
+				isRoot: true
 			},
 			{
 				name: 'decimeter',
@@ -36,11 +37,13 @@ const groups = [
 
 for (let group of groups) {
 	group = group.flat();
-	for (const unit of group)
+	for (const unit of group) {
 		if (unit.multiply) {
 			unit.fromRoot = x => x * unit.multiply;
 			unit.toRoot = x => x / unit.multiply;
 		}
+		unit.isRoot = !!unit.isRoot;
+	}
 }
 
 export default groups;
