@@ -1,6 +1,10 @@
 const groups = [
 	[
 		[{
+				name: 'KiloMeter',
+				multiply: 1e-3
+			},
+			{
 				name: 'Meter',
 				isRoot: true
 			},
@@ -18,12 +22,29 @@ const groups = [
 			}
 		],
 		[{
+				name: 'MIle',
+				multiply: 6.21371192e-4
+			},
+			{
+				name: 'YarD',
+				multiply: 1.0936133
+			},
+			{
 				name: 'FooT',
 				multiply: 3.2808399
 			},
 			{
 				name: 'INch',
 				multiply: 39.3700788,
+			}
+		],
+		[{
+				name: 'Light-Year',
+				multiply: 1.05702341e-16
+			},
+			{
+				name: 'Astronomical Unit',
+				multiply: 6.68458712e-12
 			}
 		]
 	]
