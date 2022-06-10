@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 class Unit extends Component {
   render() {
-    return (<input type='number' name={this.props.name} unit={this.props.unit}
-              value={this.props.fromRoot(+this.props.rootValue)}
-              onChange={({target})=>this.props.setRoot(+this.props.toRoot(target.value))}/>);
+    const { name, unit, rootValue, setRoot, toRoot, fromRoot } = this.props;
+    return (<input type='number' name={name} unit={unit}
+              value={fromRoot(+rootValue)}
+              onChange={({target})=>setRoot(+toRoot(target.value))}/>);
   }
 }
 
