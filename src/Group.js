@@ -14,8 +14,7 @@ class Group extends Component {
   }
 
   dataToEl(unitData) {
-    const { name, unit, fromRoot, toRoot, isRoot } = unitData;
-    return (<Unit key={name} name={name} unit={unit} fromRoot={fromRoot} toRoot={toRoot} isRoot={isRoot} setRoot={this.setRoot} rootValue={this.state.rootValue}/>);
+    return (<Unit {...unitData} key={name} setRoot={this.setRoot} rootValue={this.state.rootValue}/>);
   }
 
   render() {
