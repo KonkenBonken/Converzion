@@ -87,7 +87,31 @@ const groups = [
 			multiply: 28.35 ** -1,
 			unit: 'oz'
 		}]
-	]
+	],
+	[{
+		name: 'celsius',
+		isRoot: true,
+		unit: '°C'
+	}, {
+		name: 'fahrenheit',
+		fromRoot: c => c * 1.8 + 32,
+		toRoot: f => (f - 32) / 1.8,
+		unit: '°F'
+	}, {
+		name: 'kelvin',
+		fromRoot: c => c + 273.15,
+		toRoot: k => k - 273.15,
+		unit: 'K'
+	}, {
+		name: 'newton',
+		multiply: .33 ** -1,
+		unit: '°N'
+	}, {
+		name: 'rankine',
+		fromRoot: c => (c + 273.15) / 1.8,
+		toRoot: r => r * 1.8 - 273.15,
+		unit: '°R'
+	}]
 ];
 
 for (let group of groups) {
