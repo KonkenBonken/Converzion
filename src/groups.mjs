@@ -43,8 +43,9 @@ const groups = [
 				multiply: 1.05702341e-16
 			},
 			{
-				name: 'Astronomical Unit',
-				multiply: 6.68458712e-12
+				name: 'astronomical unit',
+				multiply: 6.68458712e-12,
+				unit: 'AU'
 			}
 		]
 	]
