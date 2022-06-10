@@ -135,6 +135,8 @@ for (let group of groups) {
 			unit.unit = unit.name.replace(/[^A-Z]/g, '').toLowerCase();
 		unit.name = unit.name.toLowerCase();
 		unit.isRoot = !!unit.isRoot;
+		if (unit.isRoot)
+			unit.fromRoot = unit.toRoot = x => x;
 	}
 }
 
