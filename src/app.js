@@ -7,6 +7,6 @@ import groups from './groups.mjs';
 
 const root = createRoot(document.querySelector('#root'));
 
-root.render(<div>
-  {groups.map(group=><Group key={group.map(u=>u.unit).join('>')}>{group}</Group>)}
-</div>);
+root.render(<React.StrictMode>
+  {groups.map(group=><Group key={group.map(u=>u.unit).filter(Boolean).join('>')} unitDatas={group}></Group>)}
+</React.StrictMode>);

@@ -18,15 +18,13 @@ class Group extends Component {
   }
 
   render() {
-    const elements = [];
-    this.props.children.forEach((unitData, i) => {
+    const elements = this.props.unitDatas.map((unitData, i) => {
       if (typeof unitData === 'string') {
-        if (i === 0) elements.push(<h3>{unitData}</h3>)
-        else elements.push(<h4>{unitData}</h4>)
+        if (i === 0) return <h3>{unitData}</h3>;
+        else return <h4>{unitData}</h4>;
       } else
-        elements.push(this.dataToEl(unitData))
+        return (this.dataToEl(unitData))
     });
-
     return (<div className='group'>{elements}</div>);
   }
 }
