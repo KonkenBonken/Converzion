@@ -11,10 +11,10 @@ const groups = [
 			multiply: 10
 		}, {
 			name: 'CentiMeter',
-			multiply: 100
+			multiply: 1e2
 		}, {
 			name: 'MilliMeter',
-			multiply: 1000
+			multiply: 1e3
 		}],
 		[{
 			name: 'MIle',
@@ -36,6 +36,56 @@ const groups = [
 			name: 'astronomical unit',
 			multiply: 6.68458712e-12,
 			unit: 'AU'
+		}]
+	],
+	[
+		[{
+			name: 'GigaTonne',
+			multiply: 1e15,
+			unit: 'Gt'
+		}, {
+			name: 'MegaTonne',
+			multiply: 1e12,
+			unit: 'Mt'
+		}, {
+			name: 'Tonne',
+			multiply: 1e6
+		}, {
+			name: 'KiloGram',
+			multiply: 1e3
+		}, {
+			name: 'Gram',
+			isRoot: true
+		}, {
+			name: 'MilliGram',
+			multiply: 1e-3
+		}, {
+			name: 'MicroGram',
+			multiply: 1e-6,
+			unit: 'µg'
+		}, {
+			name: 'NanogGram',
+			multiply: 1e-9
+		}, {
+			name: 'PicoGram',
+			multiply: 1e-12
+		}],
+		[{
+			name: 'us ton',
+			multiply: 907e3,
+			unit: 'US ton'
+		}, {
+			name: 'uk ton',
+			multiply: 1.016e6,
+			unit: 'UK ton'
+		}, {
+			name: 'pound',
+			multiply: 453.59 ** -1,
+			unit: 'lb'
+		}, {
+			name: 'ounce',
+			multiply: 28.35 ** -1,
+			unit: 'oz'
 		}]
 	]
 ];
