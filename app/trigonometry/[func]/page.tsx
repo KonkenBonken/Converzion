@@ -10,7 +10,7 @@ export const pages = {
   tan: {
     name: 'tan'
   }
-}
+} as const;
 
 export default function Page({ params: { func } }: { params: { func: keyof typeof pages } }) {
   console.log(pages, func, pages[func])
