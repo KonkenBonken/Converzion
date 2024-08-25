@@ -33,8 +33,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <li>
                   <a href="/trigonometry/tan">Tangent</a>
                 </li>
-
               </ul>
+            </li>
+
+            <li>
+              <a href="/units/distance">Distance Unit Converter</a>
             </li>
           </ul>
         </section>

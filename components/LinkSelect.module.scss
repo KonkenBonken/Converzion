@@ -1,0 +1,57 @@
+.linkSelect {
+  background-color: #fff;
+  border: #3C3D37 .1em solid;
+  border-radius: .2em;
+  position: relative;
+  width: max-content;
+  padding: .2ch 1ch;
+
+  > span.current, > ul > li > a {
+    display: inline-flex;
+    justify-content: space-between;
+    gap: 3ch;
+
+    > span:not(:first-child):last-child {
+      color: #666;
+    }
+  }
+
+  > ul {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    width: max-content;
+    height: max-content;
+    top: calc(100% + .2em);
+    left: 0;
+    z-index: 2;
+    padding: .25em 0;
+    margin: 0;
+    border: #3C3D37 .1em solid;
+    border-radius: .2em;
+
+    > li {
+      appearance: none;
+      display: block;
+      padding: .05em 1ch;
+
+      &:hover {
+        background-color: #eee;
+      }
+
+      > a {
+        display: flex;
+        color: #000;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &:focus-within {
+    background-color: #eee;
+
+    > ul {
+      display: block;
+    }
+  }
+}
