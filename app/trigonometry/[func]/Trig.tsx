@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import type { pages } from './page';
+import type { params } from './page';
 
-export default function Trig({ name }: { name: keyof typeof pages }) {
+export default function Trig({ name }: { name: keyof params }) {
   const func = Math[name];
 
   const [input, setInput] = useState<number | undefined>(undefined);

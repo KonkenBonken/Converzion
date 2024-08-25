@@ -1,6 +1,8 @@
-import Trig from "./Trig";
+import { notFound } from 'next/navigation'
+import { isKeyOfObject } from '@/src/utils';
+import Trig from './Trig';
 
-export const pages = {
+const params = {
   sin: {
     name: 'sin'
   },
@@ -12,12 +14,11 @@ export const pages = {
   }
 } as const;
 
-export default function Page({ params: { func } }: { params: { func: keyof typeof pages } }) {
-  console.log(pages, func, pages[func])
+export type params = typeof params;
 
-  return <Trig name={pages[func].name} />
-}
+export default function Page({ params: { func } }: { params: { func: string } }) {
+  if (!isKeyOfObject(func, params))
+    notFound()
 
-export async function generateStaticParams() {
-  return [{ func: 'sin' }, { func: 'cos' }, { func: 'tan' }]
+  return <Trig name={params[func].name} />
 }
