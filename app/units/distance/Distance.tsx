@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { units } from './[from]/[to]/page';
+import units from '@/src/data/distance'
 import LinkSelect from '@/components/LinkSelect';
 import { usePathname } from "next/navigation";
 import scss from './distance.module.scss';
@@ -54,5 +54,7 @@ export default function Distance({ from, to }: { from?: string, to?: string }) {
         <span>{input} <Unit unit={fromObj} /> = </span><span>{result} <Unit unit={toObj} /></span>
       </div>
     }
+    <div className={scss.text}>{fromObj.text}</div>
+    <div className={scss.text}>{toObj.text}</div>
   </>);
 }
