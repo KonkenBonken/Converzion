@@ -1,5 +1,5 @@
-import Distance from '../../Distance';
+import Length from '../../Length';
 
 export default function Page({ params: { from, to } }: { params: { from: string, to: string } }) {
-  return <Distance from={from} to={to} />
+  return <Length from={from} to={to} />
 }

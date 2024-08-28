@@ -1,9 +1,8 @@
 import { parse } from 'csv-parse/sync';
-import distanceData from './distance.csv'
+import lengthData from './length.csv'
 import { capitalize } from '@/src/utils';
 
-
-export default Object.fromEntries(parse(distanceData, {
+export default Object.fromEntries(parse(lengthData, {
   columns: true,
   on_record(data) {
     const unit = data.unit || data.name.toLowerCase();

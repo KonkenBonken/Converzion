@@ -37,7 +37,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </li>
 
             <li>
-              <a href="/units/distance">Distance Unit Converter</a>
+              <a href="/units/length">Length Unit Converter</a>
             </li>
           </ul>
         </section>

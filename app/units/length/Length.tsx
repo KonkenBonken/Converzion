@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import units from '@/src/data/distance'
+import units from '@/src/data/length'
 import { LinkSelect, LinkList } from '@/components/LinkSelect';
 import { usePathname } from "next/navigation";
 import scss from '@/app/main.module.scss';
@@ -44,7 +44,7 @@ function UnitList({ from, select }: { from?: true, select?: true }) {
     } />
 }
 
-export default function Distance({ from, to }: { from?: string, to?: string }) {
+export default function Length({ from, to }: { from?: string, to?: string }) {
   const fromObj: typeof units[string] | undefined = units[from ?? ''];
   const toObj: typeof units[string] | undefined = units[to ?? ''];
 
@@ -57,9 +57,9 @@ export default function Distance({ from, to }: { from?: string, to?: string }) {
 
   return (<>
     <section className={scss.mainSection}>
-      <h2>Distance unit converter</h2>
+      <h2>Length unit converter</h2>
       <section>
-        Convert distance from
+        Convert length from
         <UnitList select from /> to
         {ready && <SwapButton />}
         <UnitList select />
