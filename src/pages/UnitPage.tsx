@@ -54,16 +54,17 @@ export default function UnitPage(
       } />
   }
 
-  return function Page({ params: { from, to } }: { params: { from?: string, to?: string } }) {
+  return function Page({ params: { from, to }, searchParams: { n = '1' } }: { params: { from?: string, to?: string }, searchParams: { n: string } }) {
     from = decodeURI(from ?? '');
     to = decodeURI(to ?? '');
 
     const fromObj: typeof units[string] | undefined = units[from];
     const toObj: typeof units[string] | undefined = units[to];
 
+    const defaultValue = parseFloat(n) || 1;
     const incomplete = from === '-' || to === '-';
 
-    const [input, setInput] = useState<number>(1);
+    const [input, setInput] = useState(defaultValue);
     const result = (input && fromObj && toObj) && +(input / fromObj.toRoot * toObj.toRoot).toPrecision(6);
 
     const ready = !!(!incomplete && fromObj && toObj);
