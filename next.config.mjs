@@ -8,6 +8,19 @@ const nextConfig = {
       }
     )
     return config
+  },
+  async redirects() {
+    return [
+      {
+        source: '/units/:type',
+        destination: '/units/:type/-/-',
+        permanent: true
+      }, {
+        source: '/units/:type/-',
+        destination: '/units/:type/-/-',
+        permanent: true
+      }
+    ]
   }
 };
 
