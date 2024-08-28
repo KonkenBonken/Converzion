@@ -19,7 +19,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <h1>Converzion</h1>
           <h2>Math tools online</h2>
         </header>
-        <section className={scss.sidebar}>
+        <section className={scss.navbar}>
           <ul>
             <li>
               <a href="/trigonometry">Trigonometry</a>
