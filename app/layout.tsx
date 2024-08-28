@@ -39,6 +39,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <li>
               <a href="/units/length">Length Unit Converter</a>
             </li>
+            <li>
+              <a href="/units/mass">Mass Unit Converter</a>
+            </li>
           </ul>
         </section>
         <main className={scss.main}>
