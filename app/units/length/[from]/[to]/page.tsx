@@ -1,5 +1,5 @@
-import Length from '../../Length';
+"use client";
+import UnitPage from "@/src/pages/UnitPage";
+import units from '@/src/data/length';
 
-export default function Page({ params: { from, to } }: { params: { from: string, to: string } }) {
-  return <Length from={from} to={to} />
-}
+export default UnitPage(units, 'Length');
