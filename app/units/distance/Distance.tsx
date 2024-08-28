@@ -5,6 +5,7 @@ import { LinkSelect, LinkList } from '@/components/LinkSelect';
 import { usePathname } from "next/navigation";
 import scss from '@/app/main.module.scss';
 import hasch from "hasch";
+import SwapButton from "@/components/Swap";
 import clsx from "clsx";
 
 function Unit({ unit }: { unit: typeof units[string] }) {
@@ -60,6 +61,7 @@ export default function Distance({ from, to }: { from?: string, to?: string }) {
       <section>
         Convert distance from
         <UnitList select from /> to
+        {ready && <SwapButton />}
         <UnitList select />
       </section>
       {
