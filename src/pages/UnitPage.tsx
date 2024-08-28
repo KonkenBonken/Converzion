@@ -95,13 +95,13 @@ export default function UnitPage(
           {toObj.text}
         </article>}
       </section>
-      {fromObj && <section className={clsx(scss.linkList, scss.to)}>
-        <h4>Convert {fromObj.name} to other {lowerName} units:</h4>
-        <UnitList />
-      </section>}
       {toObj && <section className={clsx(scss.linkList, scss.from)}>
         <h4>Convert other {lowerName} units to {toObj.name}:</h4>
         <UnitList from />
+      </section>}
+      {fromObj && <section className={clsx(scss.linkList, scss.to)}>
+        <h4>Convert {fromObj.name} to other {lowerName} units:</h4>
+        <UnitList />
       </section>}
     </>);
   }

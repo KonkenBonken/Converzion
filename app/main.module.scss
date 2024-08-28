@@ -1,7 +1,7 @@
 .body {
   background-color: #ECDFCC;
   display: grid;
-  grid-template-columns: minmax(12rem, 16vw) 1fr 5vw;
+  grid-template-columns: minmax(12rem, 12vw) 1fr 5vw;
   grid-template-rows: minmax(5rem, 10vh) 1fr;
   grid-column-gap: 5vw;
 
@@ -87,11 +87,11 @@
 
     .linkList {
       &.to {
-        grid-area: 2 / 1 / 3 / 2;
+        grid-area: 2 / 2 / 3 / 3;
       }
 
       &.from {
-        grid-area: 2 / 2 / 3 / 3;
+        grid-area: 2 / 1 / 3 / 2;
       }
     }
   }
