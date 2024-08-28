@@ -11,7 +11,7 @@ export default function UnitPage(
   units: Record<string, {
     name: string
     unit: string
-    toM: number
+    toRoot: number
     text: string
   }>,
   name: string
@@ -61,7 +61,7 @@ export default function UnitPage(
     const incomplete = from === '-' || to === '-';
 
     const [input, setInput] = useState<number>(1);
-    const result = (input && fromObj && toObj) && +(input / fromObj.toM * toObj.toM).toPrecision(6);
+    const result = (input && fromObj && toObj) && +(input / fromObj.toRoot * toObj.toRoot).toPrecision(6);
 
     const ready = !!(!incomplete && fromObj && toObj);
 
