@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { LinkSelect, LinkList } from '@/src/components/LinkSelect';
-import { usePathname } from "next/navigation";
+import { usePathname } from "../utils";
 import scss from '@/app/main.module.scss';
 import hasch from "hasch";
 import SwapButton from "@/src/components/Swap";
@@ -23,7 +23,7 @@ export default function UnitPage(
   }
 
   function UnitList({ from, select }: { from?: true, select?: true }) {
-    const current = usePathname()?.split('/') ?? [];
+    const current = usePathname().split('/');
 
     const href = (unit: typeof units[string]) => {
       current[3] ||= '-';
@@ -55,8 +55,11 @@ export default function UnitPage(
   }
 
   return function Page({ params: { from, to } }: { params: { from?: string, to?: string } }) {
-    const fromObj: typeof units[string] | undefined = units[from ?? ''];
-    const toObj: typeof units[string] | undefined = units[to ?? ''];
+    from = decodeURI(from ?? '');
+    to = decodeURI(to ?? '');
+
+    const fromObj: typeof units[string] | undefined = units[from];
+    const toObj: typeof units[string] | undefined = units[to];
 
     const incomplete = from === '-' || to === '-';
 

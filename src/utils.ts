@@ -1,3 +1,5 @@
+import { usePathname as nextUsePathname } from "next/navigation";
+
 export function isKeyOfObject<T extends Record<string, any>>(
   key: string | number | symbol,
   obj: T,
@@ -7,4 +9,8 @@ export function isKeyOfObject<T extends Record<string, any>>(
 
 export function capitalize(text: string) {
   return text.toLowerCase().replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+}
+
+export function usePathname() {
+  return decodeURI(nextUsePathname() ?? '')
 }
