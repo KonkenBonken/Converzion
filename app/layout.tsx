@@ -8,7 +8,7 @@ import "./globals.scss";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Converzion"
+  title: "Utilz.eu"
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -16,8 +16,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body className={clsx(inter.className, scss.body)}>
         <header className={scss.header}>
-          <h1>Converzion</h1>
-          <h2>Math tools online</h2>
+          <h1>Utilz.eu</h1>
+          <h2>Free Utilities Online</h2>
         </header>
         <section className={scss.navbar}>
           <ul>
