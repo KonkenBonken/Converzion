@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import clsx from "clsx";
 import { Inter } from "next/font/google";
 
+import NavLinkList from '@/src/page/paths'
+
 import scss from './main.module.scss';
 import "./globals.scss";
 
@@ -20,29 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <h2>Free Utilities Online</h2>
         </header>
         <section className={scss.navbar}>
-          <ul>
-            <li>
-              <a href="/trigonometry">Trigonometry</a>
-              <ul>
-                <li>
-                  <a href="/trigonometry/sin">Sine</a>
-                </li>
-                <li>
-                  <a href="/trigonometry/cos">Cosine</a>
-                </li>
-                <li>
-                  <a href="/trigonometry/tan">Tangent</a>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="/units/length">Length Unit Converter</a>
-            </li>
-            <li>
-              <a href="/units/mass">Mass Unit Converter</a>
-            </li>
-          </ul>
+          <NavLinkList />
         </section>
         <main className={scss.main}>
           {children}

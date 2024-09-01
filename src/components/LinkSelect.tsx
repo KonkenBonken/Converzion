@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import scss from './LinkSelect.module.scss';
-import { usePathname } from '../utils';
+import { usePathname } from '../clientUtils';
 import clsx from 'clsx';
 
 const UnitText = (value?: [string, string?]) => value ? value.map(text => (<span key={text}>{text}</span>)) : <span>Click here</span>;
