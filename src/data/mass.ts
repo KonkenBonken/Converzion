@@ -11,11 +11,9 @@ export default Object.fromEntries(parse(massData, {
       unit,
       toRoot: parseFloat(data.toRoot),
       text: data.text,
+      TextWithLinks(_: Units) {
+        return data.text
+      }
     }]
   }
-})) as Record<string, {
-  name: string
-  unit: string
-  toRoot: number
-  text: string
-}>
+})) as Units
