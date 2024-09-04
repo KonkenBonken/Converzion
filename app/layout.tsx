@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import clsx from "clsx";
 import { Inter } from "next/font/google";
+import { GoogleTagManager } from '@next/third-parties/google';
 
 import NavLinkList from '@/src/page/paths'
 
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <GoogleTagManager gtmId="G-E9SW9RXXSE" />
       <body className={clsx(inter.className, scss.body)}>
         <header className={scss.header}>
           <h1>Utilz.eu</h1>
