@@ -19,7 +19,11 @@ const nextConfig = {
         source: '/units/:type/-',
         destination: '/units/:type/-/-',
         permanent: true
-      }
+      }, {
+        source: '/base/:from',
+        destination: '/base/:from/-',
+        permanent: true
+      },
     ]
   }
 };
