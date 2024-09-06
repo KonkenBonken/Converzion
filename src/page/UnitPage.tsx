@@ -17,12 +17,17 @@ export default function UnitPage(
     return <abbr title={unit.name}>{unit.unit}</abbr>
   }
 
-  function UnitList({ from, select }: { from?: true, select?: true }) {
+  function UnitList({ from, both, select, length = 15 }: { from?: true, both?: true, select?: true, length?: number }) {
     const current = usePathname().split('/');
 
-    const href = (unit: typeof units[string]) => {
+    const href = (unit: typeof units[string], other?: string) => {
       current[3] ||= '-';
       current[4] ||= '-';
+
+      if (other) {
+        current[3] = other;
+        current[4] = other;
+      }
 
       if (from)
         current[3] = unit.unit;
@@ -38,15 +43,27 @@ export default function UnitPage(
         value: [unit.name, unit.unit]
       }))
     } />
-      : <LinkList links={
+      : both ? <LinkList links={
         Object.values(units)
           .sort((a, b) => hasch(a.unit + current, { decimal: true, seed: from }) - hasch(b.unit + current, { decimal: true, seed: from }))
-          .slice(0, 15)
-          .map(unit => ({
-            href: href(unit),
-            value: [unit.name, unit.unit]
-          }))
+          .slice(0, length)
+          .map(unit => {
+            const other = hasch(current + unit.unit, { choose: Object.keys(units), seed: Math.floor((new Date).getDate() / 7) });
+            return {
+              href: href(unit, other),
+              value: [`Convert ${other} to ${unit.name}`]
+            }
+          })
       } />
+        : <LinkList links={
+          Object.values(units)
+            .sort((a, b) => hasch(a.unit + current, { decimal: true, seed: from }) - hasch(b.unit + current, { decimal: true, seed: from }))
+            .slice(0, length)
+            .map(unit => ({
+              href: href(unit),
+              value: [unit.name, unit.unit]
+            }))
+        } />
   }
 
   return function Page({ params: { from, to }, searchParams: { n = '1' } }: { params: { from?: string, to?: string }, searchParams: { n: string } }) {
@@ -103,6 +120,10 @@ export default function UnitPage(
       {fromObj && <section className={clsx(scss.linkList, scss.to)}>
         <h4>Convert {fromObj.name} to other {lowerName} units:</h4>
         <UnitList />
+      </section>}
+      {!toObj && !fromObj && <section className={clsx(scss.linkList, scss.both)}>
+        <h4>Convert between these popular {lowerName} units:</h4>
+        <UnitList both length={25} />
       </section>}
     </>);
   }
