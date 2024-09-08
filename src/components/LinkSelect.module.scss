@@ -1,15 +1,16 @@
 .linkList {
   width: max-content;
   height: max-content;
-  padding: .25em 0;
+  padding: 0.25em 0;
   margin: 0;
   display: block;
 
   > li {
     appearance: none;
     display: block;
-    padding: .05em 1ch;
+    padding: 0.05em 1ch;
     background-color: #fff;
+    border-radius: 0.25em;
 
     &:hover {
       background-color: #eee;
@@ -30,29 +31,29 @@
 
   &.list {
     > li {
-      margin-bottom: .5em;
-      padding: .25em 3ch;
+      margin-bottom: 0.5em;
+      padding: 0.25em 3ch;
     }
   }
 }
 
 .linkSelect {
   background-color: #fff;
-  border: #3C3D37 .1em solid;
-  border-radius: .2em;
+  border: #3c3d37 0.1em solid;
+  border-radius: 0.2em;
   position: relative;
   width: max-content;
-  padding: .2ch 1ch;
+  padding: 0.2ch 1ch;
 
   .linkList {
     display: none;
     position: absolute;
-    top: calc(100% + .2em);
+    top: calc(100% + 0.2em);
     left: 0;
     z-index: 2;
     background-color: #fff;
-    border: #3C3D37 .1em solid;
-    border-radius: .2em;
+    border: #3c3d37 0.1em solid;
+    border-radius: 0.2em;
   }
 
   > span.current {

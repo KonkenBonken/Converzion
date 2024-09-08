@@ -93,8 +93,10 @@ export default function UnitPage(
           <UnitList select />
         </section>
         {
-          ready &&
-          <input type="number" value={input} onInput={e => setInput(e.currentTarget.valueAsNumber || 0)} />
+          ready && <>
+            <span>Input:</span>
+            <input type="number" value={input} onInput={e => setInput(e.currentTarget.valueAsNumber || 0)} />
+          </>
         }
         {
           !!(!incomplete && fromObj && toObj) &&
@@ -102,6 +104,20 @@ export default function UnitPage(
             <span>{input} <Unit unit={fromObj} /> = </span><span>{result} <Unit unit={toObj} /></span>
           </div>
         }
+      </section>
+      <section className={scss.linkList}>
+        {toObj && <section className={scss.from}>
+          <h4>Convert other {lowerName} units to {toObj.name}:</h4>
+          <UnitList from />
+        </section>}
+        {fromObj && <section className={scss.to}>
+          <h4>Convert {fromObj.name} to other {lowerName} units:</h4>
+          <UnitList />
+        </section>}
+        {!toObj && !fromObj && <section className={scss.both}>
+          <h4>Convert between these popular {lowerName} units:</h4>
+          <UnitList both length={25} />
+        </section>}
       </section>
       <section className={scss.sidebar}>
         {fromObj && <article>
@@ -113,18 +129,6 @@ export default function UnitPage(
           {toObj.TextWithLinks(units)}
         </article>}
       </section>
-      {toObj && <section className={clsx(scss.linkList, scss.from)}>
-        <h4>Convert other {lowerName} units to {toObj.name}:</h4>
-        <UnitList from />
-      </section>}
-      {fromObj && <section className={clsx(scss.linkList, scss.to)}>
-        <h4>Convert {fromObj.name} to other {lowerName} units:</h4>
-        <UnitList />
-      </section>}
-      {!toObj && !fromObj && <section className={clsx(scss.linkList, scss.both)}>
-        <h4>Convert between these popular {lowerName} units:</h4>
-        <UnitList both length={25} />
-      </section>}
     </>);
   }
 }
