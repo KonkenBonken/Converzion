@@ -9,8 +9,6 @@ import { useState } from 'react';
 const alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-+!@#$^';
 const bases = Array(alphabet.length - 1).fill(0).map((_, i) => (i + 2).toString());
 
-console.log(bases)
-
 function BaseList({ from }: { from?: true }) {
   const current = usePathname().split('/');
 
@@ -26,7 +24,6 @@ function BaseList({ from }: { from?: true }) {
     return current.join('/');
   }
 
-
   return <LinkSelect links={
     Object.values(bases).map(base => ({
       href: href(base),
@@ -40,18 +37,17 @@ export default function BasePage({ params: { from, to } }: { params: { from?: st
   const fromN = parseInt(from ?? '');
   const toN = parseInt(to ?? '');
 
-  const complete = !Number.isNaN(fromN) && !Number.isNaN(toN);
+  const complete = !Number.isNaN(fromN) && !Number.isNaN(toN) && 2 <= fromN && fromN <= 70 && 2 <= toN && toN <= 70;
 
   const [input, setInput] = useState('10');
 
   const fromAlpha = alphabet.slice(0, fromN);
   const toAlpha = alphabet.slice(0, toN);
 
-
-  const converter = anyBase(fromAlpha, toAlpha);
+  const converter = complete && anyBase(fromAlpha, toAlpha);
   const validInput = input.split('').every(c => fromAlpha.includes(c))
 
-  const result = validInput && converter(input)
+  const result = validInput && converter && converter(input)
 
   return <section className={scss.mainSection}>
     <h2>Number base converter</h2>
@@ -66,7 +62,7 @@ export default function BasePage({ params: { from, to } }: { params: { from?: st
       <input type="number" value={input} onInput={e => setInput(e.currentTarget.value || '10')} />
     }
     {
-      !!(complete && fromN && toN && validInput) &&
+      !!(complete && validInput) &&
       <div className={scss.result}>
         {input}<sub>{fromN}</sub> = {result}<sub>{toN}</sub>
       </div>
