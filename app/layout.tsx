@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     template: '%s | Utilz.eu'
   },
   applicationName: 'Utilz.eu',
+  description: 'Free Utilities Online',
   openGraph: {
     title: 'Utilz.eu',
     description: 'Free Utilities Online',

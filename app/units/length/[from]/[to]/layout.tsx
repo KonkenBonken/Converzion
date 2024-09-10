@@ -25,11 +25,12 @@ export async function generateMetadata(
   else
     title = 'Convert between any two length units';
 
+  const description = 'Simple online utility to convert any number between any two length units';
+
   return {
-    title,
+    title, description,
     openGraph: {
-      title,
-      description: 'Simple online utility to convert any number between any two length units',
+      title, description,
       url: `https://utilz.eu/units/length/${from}/${to}`,
     }
   };

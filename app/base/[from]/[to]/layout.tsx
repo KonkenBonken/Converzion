@@ -21,11 +21,12 @@ export async function generateMetadata(
   else
     title = 'Convert between any two bases';
 
+  const description = 'Simple online utility to convert any number between any two bases';
+
   return {
-    title,
+    title, description,
     openGraph: {
-      title,
-      description: 'Simple online utility to convert any number between any two bases',
+      title, description,
       url: `https://utilz.eu/units/length/${from}/${to}`,
     }
   };
