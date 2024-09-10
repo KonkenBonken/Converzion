@@ -20,8 +20,8 @@ const nextConfig = {
         destination: '/units/:type/-/-',
         permanent: true
       }, {
-        source: '/base/:from',
-        destination: '/base/:from/-',
+        source: '/base',
+        destination: '/base/-/-',
         permanent: true
       },
     ]

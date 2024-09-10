@@ -2,7 +2,8 @@ export default function () {
   return NavLinkList(
     {
       trigonometry: ['sin', 'cos', 'tan'],
-      units: ['length', 'mass']
+      units: ['length', 'mass'],
+      base: []
     }
   )
 };
