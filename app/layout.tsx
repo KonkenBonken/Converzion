@@ -11,7 +11,19 @@ import "./globals.scss";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Utilz.eu"
+  title: {
+    default: "Utilz.eu",
+    template: '%s | Utilz.eu'
+  },
+  applicationName: 'Utilz.eu',
+  openGraph: {
+    title: 'Utilz.eu',
+    description: 'Free Utilities Online',
+    url: 'https://utilz.eu',
+    siteName: 'Utilz.eu',
+    locale: 'en_US',
+    type: 'website',
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
