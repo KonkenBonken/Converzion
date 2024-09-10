@@ -11,7 +11,7 @@ export function LinkList({ links, select }: { links: { href: string, value: [str
   return <ul className={clsx(scss.linkList, !select && scss.list)}>
     {links.map(({ href, value }) => (
       <li key={value.join()}>
-        <Link href={href}>{UnitText(value)}</Link>
+        <Link href={href} title={value[0]}>{UnitText(value)}</Link>
       </li>
     ))}
   </ul>;
