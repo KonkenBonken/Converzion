@@ -16,8 +16,6 @@ export default Object.fromEntries(parse(lengthData, {
         if (text.length === 1)
           return data.text;
 
-        console.log(text)
-
         const res: (string | JSX.Element)[] = [];
 
         function parse(str: string) {
@@ -36,8 +34,6 @@ export default Object.fromEntries(parse(lengthData, {
             continue;
           }
 
-          console.log(text[i])
-
           const lastWord = text[i].split(' ').at(-1);
 
           if (!lastWord) {
@@ -46,11 +42,9 @@ export default Object.fromEntries(parse(lengthData, {
           }
 
 
-          const unitObj = Object.values(units).find(obj => {
-            console.log([obj.name, obj.name + 's', obj.unit], (lastWord))
-
-            return [obj.name, obj.name + 's', obj.unit].map(w => w.toLowerCase()).includes(lastWord.toLowerCase())
-          })
+          const unitObj = Object.values(units).find(obj =>
+            [obj.name, obj.name + 's', obj.unit].map(w => w.toLowerCase()).includes(lastWord.toLowerCase())
+          )
 
           if (!unitObj) {
             res.push(text[i])

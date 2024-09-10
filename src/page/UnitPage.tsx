@@ -5,7 +5,6 @@ import { usePathname } from "../clientUtils";
 import scss from '@/app/main.module.scss';
 import hasch from "hasch";
 import SwapButton from "@/src/components/Swap";
-import clsx from "clsx";
 
 export default function UnitPage(
   units: Units,

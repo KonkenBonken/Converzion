@@ -37,7 +37,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   urls.push("trigonometry/sin", "trigonometry/cos", "trigonometry/tan");
 
-  console.log(urls.length, "urls in sitemap.xml");
-
   return urls.map((url) => ({ url: `https://utilz.eu/${url}` }));
 }
