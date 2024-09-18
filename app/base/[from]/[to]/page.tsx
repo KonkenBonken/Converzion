@@ -1,21 +1,27 @@
 "use client";
 import anyBase from 'any-base';
 import { usePathname } from 'next/navigation';
-import { LinkSelect } from '@/src/components/LinkSelect';
+import { LinkSelect, LinkList } from '@/src/components/LinkSelect';
 import SwapButton from "@/src/components/Swap";
 import scss from '@/app/main.module.scss';
 import { useState } from 'react';
 import texts from '@/src/data/base';
+import hasch from 'hasch';
 
 const alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-+!@#$^';
 const bases = Array(alphabet.length - 1).fill(0).map((_, i) => (i + 2).toString());
 
-function BaseList({ from }: { from?: true }) {
+function BaseList({ from, both, select, length = 15 }: { from?: true, both?: true, select?: true, length?: number }) {
   const current = usePathname().split('/');
 
-  const href = (base: string) => {
+  const href = (base: string, other?: string) => {
     current[2] ||= '-';
     current[3] ||= '-';
+
+    if (other) {
+      current[2] = other;
+      current[3] = other;
+    }
 
     if (from)
       current[2] = base;
@@ -25,12 +31,32 @@ function BaseList({ from }: { from?: true }) {
     return current.join('/');
   }
 
-  return <LinkSelect links={
-    Object.values(bases).map(base => ({
+  return select ? <LinkSelect links={
+    bases.map(base => ({
       href: href(base),
       value: [base]
     }))
+  } /> : both ? <LinkList links={
+    bases
+      .sort((a, b) => hasch(a + current, { decimal: true, seed: from }) - hasch(b + current, { decimal: true, seed: from }))
+      .slice(0, length)
+      .map(base => {
+        const other = hasch(current + base, { choose: bases, seed: Math.floor((new Date).getDate() / 7) });
+        return {
+          href: href(base, other),
+          value: [`Convert ${other} to ${base}`]
+        }
+      })
   } />
+    : <LinkList links={
+      bases
+        .sort((a, b) => hasch(a + current, { decimal: true, seed: from }) - hasch(b + current, { decimal: true, seed: from }))
+        .slice(0, length)
+        .map(base => ({
+          href: href(base),
+          value: [base]
+        }))
+    } />
 }
 
 
@@ -57,9 +83,9 @@ export default function BasePage({ params: { from, to } }: { params: { from?: st
     <h2>Number base converter</h2>
     <section>
       Convert any number from base
-      <BaseList from /> to
+      <BaseList select from /> to
       {complete && <SwapButton />}
-      base <BaseList />
+      base <BaseList select />
     </section>
     {
       complete &&
@@ -71,6 +97,20 @@ export default function BasePage({ params: { from, to } }: { params: { from?: st
         {input}<sub>{fromN}</sub> = {result}<sub>{toN}</sub>
       </div>
     }
+    <section className={scss.linkList}>
+      {toN && <section className={scss.from}>
+        <h4>Convert other number bases to base {toN}:</h4>
+        <BaseList from />
+      </section>}
+      {fromN && <section className={scss.to}>
+        <h4>Convert base {fromN} to other number bases:</h4>
+        <BaseList />
+      </section>}
+      {!toN && !fromN && <section className={scss.both}>
+        <h4>Convert between these popular number bases:</h4>
+        <BaseList both length={25} />
+      </section>}
+    </section>
     <section className={scss.sidebar}>
       {fromN && texts[fromN] && <article>
         <FromText />
