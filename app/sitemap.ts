@@ -3,7 +3,7 @@ import massUnits from "@/src/data/mass";
 import lengthUnits from "@/src/data/length";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const urls = [];
+  const urls = [''];
 
   urls.push(
     ...Object.keys(lengthUnits).flatMap((a) => [
