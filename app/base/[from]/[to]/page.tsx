@@ -5,6 +5,7 @@ import { LinkSelect } from '@/src/components/LinkSelect';
 import SwapButton from "@/src/components/Swap";
 import scss from '@/app/main.module.scss';
 import { useState } from 'react';
+import texts from '@/src/data/base';
 
 const alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-+!@#$^';
 const bases = Array(alphabet.length - 1).fill(0).map((_, i) => (i + 2).toString());
@@ -49,6 +50,9 @@ export default function BasePage({ params: { from, to } }: { params: { from?: st
 
   const result = validInput && converter && converter(input)
 
+  const FromText = texts[fromN];
+  const ToText = texts[toN];
+
   return <section className={scss.mainSection}>
     <h2>Number base converter</h2>
     <section>
@@ -67,5 +71,13 @@ export default function BasePage({ params: { from, to } }: { params: { from?: st
         {input}<sub>{fromN}</sub> = {result}<sub>{toN}</sub>
       </div>
     }
+    <section className={scss.sidebar}>
+      {fromN && texts[fromN] && <article>
+        <FromText />
+      </article>}
+      {toN && texts[toN] && <article>
+        <ToText />
+      </article>}
+    </section>
   </section>
 }
