@@ -112,10 +112,10 @@ export default function BasePage({ params: { from, to } }: { params: { from?: st
       </section>}
     </section>
     <section className={scss.sidebar}>
-      {fromN && texts[fromN] && <article>
+      {!!fromN && texts[fromN] && <article>
         <FromText />
       </article>}
-      {toN && texts[toN] && <article>
+      {!!toN && texts[toN] && <article>
         <ToText />
       </article>}
     </section>
