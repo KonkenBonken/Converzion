@@ -44,7 +44,7 @@ function BaseList({ from, both, select, length = 15 }: { from?: true, both?: tru
         const other = hasch(current + base, { choose: bases, seed: Math.floor((new Date).getDate() / 7) });
         return {
           href: href(base, other),
-          value: [`Convert ${other} to ${base}`]
+          value: [`Convert base ${other} to base ${base}`]
         }
       })
   } />
@@ -54,7 +54,7 @@ function BaseList({ from, both, select, length = 15 }: { from?: true, both?: tru
         .slice(0, length)
         .map(base => ({
           href: href(base),
-          value: [base]
+          value: [from ? `Convert from base ${base}` : `Convert to base ${base}`]
         }))
     } />
 }
