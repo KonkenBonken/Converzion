@@ -1,7 +1,7 @@
 "use client";
 import anyBase from 'any-base';
-import { usePathname } from 'next/navigation';
-import { LinkSelect, LinkList } from '@/src/components/LinkSelect';
+import { usePathname, useRouter } from 'next/navigation';
+import { LinkList } from '@/src/components/LinkSelect';
 import SwapButton from "@/src/components/Swap";
 import scss from '@/app/main.module.scss';
 import { useState } from 'react';
@@ -11,7 +11,7 @@ import hasch from 'hasch';
 const alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-+!@#$^';
 const bases = Array(alphabet.length - 1).fill(0).map((_, i) => (i + 2).toString());
 
-function BaseList({ from, both, select, length = 15 }: { from?: true, both?: true, select?: true, length?: number }) {
+function BaseList({ from, both, length = 15 }: { from?: true, both?: true, length?: number }) {
   const current = usePathname().split('/');
 
   const href = (base: string, other?: string) => {
@@ -31,12 +31,7 @@ function BaseList({ from, both, select, length = 15 }: { from?: true, both?: tru
     return current.join('/');
   }
 
-  return select ? <LinkSelect links={
-    bases.map(base => ({
-      href: href(base),
-      value: [base]
-    }))
-  } /> : both ? <LinkList links={
+  return both ? <LinkList links={
     bases
       .sort((a, b) => hasch(a + current, { decimal: true, seed: from }) - hasch(b + current, { decimal: true, seed: from }))
       .slice(0, length)
@@ -79,13 +74,27 @@ export default function BasePage({ params: { from, to } }: { params: { from?: st
   const FromText = texts[fromN];
   const ToText = texts[toN];
 
+  const router = useRouter();
+
   return <section className={scss.mainSection}>
     <h2>Number base converter</h2>
     <section>
       Convert any number from base
-      <BaseList select from /> to
+      <select onChange={e => router.push(`/base/${e.currentTarget.value}/${toN}`)} defaultValue={fromN}>
+        <option disabled>-</option>
+        {bases.map(base => (
+          <option key={base}>{base}</option>
+        ))}
+      </select>
+      to
       {complete && <SwapButton />}
-      base <BaseList select />
+      base
+      <select onChange={e => router.push(`/base/${fromN}/${e.currentTarget.value}`)} defaultValue={toN}>
+        <option disabled>-</option>
+        {bases.map(base => (
+          <option key={base}>{base}</option>
+        ))}
+      </select>
     </section>
     {
       complete &&
