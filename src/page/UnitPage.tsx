@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { LinkSelect, LinkList } from '@/src/components/LinkSelect';
+import { useRouter } from "next/navigation";
+import { LinkList } from '@/src/components/LinkSelect';
 import { usePathname } from "../clientUtils";
 import scss from '@/app/main.module.scss';
 import hasch from "hasch";
@@ -16,7 +17,7 @@ export default function UnitPage(
     return <abbr title={unit.name}>{unit.unit}</abbr>
   }
 
-  function UnitList({ from, both, select, length = 15 }: { from?: true, both?: true, select?: true, length?: number }) {
+  function UnitList({ from, both, length = 15 }: { from?: true, both?: true, length?: number }) {
     const current = usePathname().split('/');
 
     const href = (unit: typeof units[string], other?: string) => {
@@ -36,33 +37,27 @@ export default function UnitPage(
       return current.join('/');
     }
 
-    return select ? <LinkSelect links={
-      Object.values(units).map(unit => ({
-        href: href(unit),
-        value: [unit.name, unit.unit]
-      }))
+    return both ? <LinkList links={
+      Object.values(units)
+        .sort((a, b) => hasch(a.unit + current, { decimal: true, seed: from }) - hasch(b.unit + current, { decimal: true, seed: from }))
+        .slice(0, length)
+        .map(unit => {
+          const other = hasch(current + unit.unit, { choose: Object.keys(units), seed: Math.floor((new Date).getDate() / 7) });
+          return {
+            href: href(unit, other),
+            value: [`Convert ${other} to ${unit.name}`]
+          }
+        })
     } />
-      : both ? <LinkList links={
+      : <LinkList links={
         Object.values(units)
           .sort((a, b) => hasch(a.unit + current, { decimal: true, seed: from }) - hasch(b.unit + current, { decimal: true, seed: from }))
           .slice(0, length)
-          .map(unit => {
-            const other = hasch(current + unit.unit, { choose: Object.keys(units), seed: Math.floor((new Date).getDate() / 7) });
-            return {
-              href: href(unit, other),
-              value: [`Convert ${other} to ${unit.name}`]
-            }
-          })
+          .map(unit => ({
+            href: href(unit),
+            value: [unit.name, unit.unit]
+          }))
       } />
-        : <LinkList links={
-          Object.values(units)
-            .sort((a, b) => hasch(a.unit + current, { decimal: true, seed: from }) - hasch(b.unit + current, { decimal: true, seed: from }))
-            .slice(0, length)
-            .map(unit => ({
-              href: href(unit),
-              value: [unit.name, unit.unit]
-            }))
-        } />
   }
 
   return function Page({ params: { from, to }, searchParams: { n = '1' } }: { params: { from?: string, to?: string }, searchParams: { n: string } }) {
@@ -72,8 +67,6 @@ export default function UnitPage(
     const fromObj: typeof units[string] | undefined = units[from];
     const toObj: typeof units[string] | undefined = units[to];
 
-
-
     const defaultValue = parseFloat(n) || 1;
     const incomplete = from === '-' || to === '-';
 
@@ -82,14 +75,27 @@ export default function UnitPage(
 
     const ready = !!(!incomplete && fromObj && toObj);
 
+    const router = useRouter();
+
     return (<>
       <section className={scss.mainSection}>
         <h2>{name} unit converter</h2>
         <section>
           Convert {lowerName} from
-          <UnitList select from /> to
+          <select onChange={e => router.push(`/units/length/${e.currentTarget.value}/${to}`)} defaultValue={from}>
+            <option disabled>-</option>
+            {Object.values(units).map(unit => (
+              <option key={unit.unit} value={unit.unit}>{unit.name}</option>
+            ))}
+          </select>
+          to
           {ready && <SwapButton />}
-          <UnitList select />
+          <select onChange={e => router.push(`/units/length/${from}/${e.currentTarget.value}`)} defaultValue={to}>
+            <option disabled>-</option>
+            {Object.values(units).map(unit => (
+              <option key={unit.unit} value={unit.unit}>{unit.name}</option>
+            ))}
+          </select>
         </section>
         {
           ready && <>
