@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import clsx from "clsx";
 import { Inter } from "next/font/google";
 
-import Consent from "@/src/components/Consent";
+import Google from "@/src/components/Google";
 import NavLinkList from '@/src/page/paths'
 
 import scss from './main.module.scss';
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <Consent />
+      <Google />
       <body className={clsx(inter.className, scss.body)}>
         <header className={scss.header}>
           <h1>Utilz.eu</h1>
