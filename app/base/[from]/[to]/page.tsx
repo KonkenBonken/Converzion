@@ -6,7 +6,8 @@ import SwapButton from "@/src/components/Swap";
 import scss from '@/app/main.module.scss';
 import { useState } from 'react';
 import texts from '@/src/data/base';
-import hasch from 'hasch';
+import choose from "hasch/choose";
+import hasch from "hasch/decimal";
 
 const alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-+!@#$^';
 const bases = Array(alphabet.length - 1).fill(0).map((_, i) => (i + 2).toString());
@@ -33,10 +34,10 @@ function BaseList({ from, both, length = 15 }: { from?: true, both?: true, lengt
 
   return both ? <LinkList links={
     bases
-      .sort((a, b) => hasch(a + current, { decimal: true, seed: from }) - hasch(b + current, { decimal: true, seed: from }))
+      .sort((a, b) => hasch([a, current, from]) - hasch([b, current, from]))
       .slice(0, length)
       .map(base => {
-        const other = hasch(current + base, { choose: bases, seed: Math.floor((new Date).getDate() / 7) });
+        const other = choose([current, base, Math.floor((new Date).getDate() / 7)], bases);
         return {
           href: href(base, other),
           value: [`Convert base ${other} to base ${base}`]
@@ -45,7 +46,7 @@ function BaseList({ from, both, length = 15 }: { from?: true, both?: true, lengt
   } />
     : <LinkList links={
       bases
-        .sort((a, b) => hasch(a + current, { decimal: true, seed: from }) - hasch(b + current, { decimal: true, seed: from }))
+        .sort((a, b) => hasch([a, current, from]) - hasch([b, current, from]))
         .slice(0, length)
         .map(base => ({
           href: href(base),

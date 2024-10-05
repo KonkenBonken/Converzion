@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation";
 import { LinkList } from '@/src/components/LinkSelect';
 import { usePathname } from "../clientUtils";
 import scss from '@/app/main.module.scss';
-import hasch from "hasch";
+import choose from "hasch/choose";
+import hasch from "hasch/decimal";
 import SwapButton from "@/src/components/Swap";
 
 export default function UnitPage(
@@ -39,10 +40,10 @@ export default function UnitPage(
 
     return both ? <LinkList links={
       Object.values(units)
-        .sort((a, b) => hasch(a.unit + current, { decimal: true, seed: from }) - hasch(b.unit + current, { decimal: true, seed: from }))
+        .sort((a, b) => hasch([a.unit, current, from]) - hasch([b.unit, current, from]))
         .slice(0, length)
         .map(unit => {
-          const other = hasch(current + unit.unit, { choose: Object.keys(units), seed: Math.floor((new Date).getDate() / 7) });
+          const other = choose([current, unit.unit, Math.floor((new Date).getDate() / 7)], Object.keys(units));
           return {
             href: href(unit, other),
             value: [`Convert ${other} to ${unit.name}`]
@@ -51,7 +52,7 @@ export default function UnitPage(
     } />
       : <LinkList links={
         Object.values(units)
-          .sort((a, b) => hasch(a.unit + current, { decimal: true, seed: from }) - hasch(b.unit + current, { decimal: true, seed: from }))
+          .sort((a, b) => hasch([a.unit, current, from]) - hasch([b.unit, current, from]))
           .slice(0, length)
           .map(unit => ({
             href: href(unit),
