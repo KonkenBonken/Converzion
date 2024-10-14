@@ -4,7 +4,7 @@ import { consent, GoogleAnalytics } from "nextjs-google-analytics";
 import { GoogleAdSense } from "nextjs-google-adsense";
 
 import scss from './Google.module.scss';
-import { useState } from "react";
+import useLocalStorage from "use-local-storage";
 
 export default function Consent() {
   return <>
@@ -15,7 +15,7 @@ export default function Consent() {
 }
 
 export function AcceptButton() {
-  const [shown, setShown] = useState<true | null>(true);
+  const [shown, setShown] = useLocalStorage('show-consent', true);
 
   function onClick() {
     consent({
@@ -27,7 +27,7 @@ export function AcceptButton() {
         ad_personalization: 'granted'
       }
     });
-    setShown(null);
+    setShown(false);
   }
 
   return shown && <dialog className={scss.consent} ref={el => el?.showModal()}>
