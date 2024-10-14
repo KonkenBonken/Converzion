@@ -31,16 +31,18 @@ export function AcceptButton() {
   }
 
   function onRef(el: HTMLDialogElement) {
-    el.showModal();
-    consent({
-      arg: 'default',
-      params: {
-        ad_storage: 'granted',
-        analytics_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted'
-      }
-    });
+    if (el) {
+      el.showModal();
+      consent({
+        arg: 'default',
+        params: {
+          ad_storage: 'granted',
+          analytics_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted'
+        }
+      });
+    }
   }
 
   return shown && <dialog className={scss.consent} ref={onRef}>
