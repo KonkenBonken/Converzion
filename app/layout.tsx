@@ -31,13 +31,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <head>
-        <Script
-          src="/consent.js"
-          strategy="beforeInteractive"
-        />
-        <Google />
-      </head>
+      <Script src="/consent.js" strategy="beforeInteractive" />
+      <Google />
       <body className={clsx(inter.className, scss.body)}>
         <header className={scss.header}>
           <h1>Utilz.eu</h1>
