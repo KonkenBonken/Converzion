@@ -7,17 +7,6 @@ import scss from './Google.module.scss';
 import { useState } from "react";
 
 export default function Consent() {
-  if (typeof window !== 'undefined')
-    consent({
-      arg: 'default',
-      params: {
-        ad_storage: 'granted',
-        analytics_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted'
-      }
-    })
-
   return <>
     <GoogleAnalytics gaMeasurementId="G-E9SW9RXXSE" />
     <GoogleAdSense publisherId="ca-pub-2422033382456580" />
@@ -41,7 +30,20 @@ export function AcceptButton() {
     setShown(null);
   }
 
-  return shown && <dialog className={scss.consent} ref={el => el?.showModal()}>
+  function onRef(el: HTMLDialogElement) {
+    el.showModal();
+    consent({
+      arg: 'default',
+      params: {
+        ad_storage: 'granted',
+        analytics_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      }
+    });
+  }
+
+  return shown && <dialog className={scss.consent} ref={onRef}>
     <button onClick={onClick}>
       Consent to Tracking, Personalisation and Cookies
     </button>
