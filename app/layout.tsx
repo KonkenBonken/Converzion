@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import clsx from "clsx";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 
 import Google, { AcceptButton } from "@/src/components/Google";
 import NavLinkList from '@/src/page/paths'
@@ -30,7 +31,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <Google />
+      <head>
+        <Script
+          src="/consent.js"
+          strategy="beforeInteractive"
+        />
+        <Google />
+      </head>
       <body className={clsx(inter.className, scss.body)}>
         <header className={scss.header}>
           <h1>Utilz.eu</h1>

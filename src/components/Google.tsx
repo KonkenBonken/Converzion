@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { consent, GoogleAnalytics } from "nextjs-google-analytics";
 import { GoogleAdSense } from "nextjs-google-adsense";
 
@@ -30,28 +29,6 @@ export function AcceptButton() {
     });
     setShown(null);
   }
-
-  useEffect(() => {
-    consent({
-      arg: 'default',
-      params: {
-        ad_storage: 'granted',
-        analytics_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted'
-      }
-    });
-
-    setTimeout(() => consent({
-      arg: 'default',
-      params: {
-        ad_storage: 'granted',
-        analytics_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted'
-      }
-    }), 500);
-  });
 
   return shown && <dialog className={scss.consent} ref={el => el?.showModal()}>
     <button onClick={onClick}>
