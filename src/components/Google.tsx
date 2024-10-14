@@ -17,8 +17,8 @@ export default function Consent() {
 export function AcceptButton() {
   const [shown, setShown] = useLocalStorage('show-consent', true);
 
-  function onClick() {
-    consent({
+  if (!shown)
+    return void consent({
       arg: 'update',
       params: {
         ad_storage: 'granted',
@@ -27,13 +27,11 @@ export function AcceptButton() {
         ad_personalization: 'granted'
       }
     });
-    setShown(false);
-  }
 
-  return shown && <dialog className={scss.consent} ref={el => el?.showModal()}>
-    <button onClick={onClick}>
+  return <dialog className={scss.consent} ref={el => el?.showModal()}>
+    <button onClick={() => setShown(false)}>
       Consent to Tracking, Personalisation and Cookies
     </button>
     <a href="/privacy-policy.html">Privacy Policy</a>
-  </dialog>
+  </dialog >
 }
