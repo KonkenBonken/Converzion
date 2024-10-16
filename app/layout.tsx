@@ -32,6 +32,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <Script src="/consent.js" strategy="beforeInteractive" />
+      <head>
+        <script async crossOrigin="anonymous"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2422033382456580" />
+      </head>
       <Google />
       <body className={clsx(inter.className, scss.body)}>
         <header className={scss.header}>
