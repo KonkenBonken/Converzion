@@ -1,7 +1,6 @@
 "use client";
 
 import { consent, GoogleAnalytics } from "nextjs-google-analytics";
-import { GoogleAdSense } from "nextjs-google-adsense";
 
 import scss from './Google.module.scss';
 import useLocalStorage from "use-local-storage";
@@ -9,7 +8,8 @@ import useLocalStorage from "use-local-storage";
 export default function Consent() {
   return <>
     <GoogleAnalytics gaMeasurementId="G-E9SW9RXXSE" />
-    <GoogleAdSense publisherId="ca-pub-2422033382456580" />
+    <script async crossOrigin="anonymous"
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2422033382456580" />
     <meta name="google-adsense-account" content="ca-pub-2422033382456580" />
   </>;
 }
