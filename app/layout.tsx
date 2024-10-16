@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 
-import Google, { AcceptButton } from "@/src/components/Google";
+import Google from "@/src/components/Google";
 import NavLinkList from '@/src/page/paths'
 
 import scss from './main.module.scss';
@@ -42,7 +42,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <NavLinkList />
         </section>
         <main className={scss.main}>
-          <AcceptButton />
           {children}
         </main>
       </body>
