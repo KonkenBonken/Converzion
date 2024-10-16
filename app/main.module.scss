@@ -46,6 +46,13 @@ body.body {
     @media (width <= 1000px) {
       width: 0;
       overflow: hidden;
+
+      &:is(.body:has(main > h1) > *) {
+        width: 100%;
+        grid-area: 2 / 2 / 3 / 3;
+        margin-top: 4rem;
+        background: none;
+      }
     }
 
     ul {
@@ -66,9 +73,6 @@ body.body {
         a {
           font-weight: 700;
         }
-
-        > li {
-        }
       }
     }
   }
@@ -77,6 +81,10 @@ body.body {
     flex-direction: column;
     gap: 3em;
     display: flex;
+
+    > main > h1 {
+      margin-left: 8vw;
+    }
 
     > section {
       justify-content: space-between;
