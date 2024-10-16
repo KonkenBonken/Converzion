@@ -35,7 +35,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <Google />
       <body className={clsx(inter.className, scss.body)}>
         <header className={scss.header}>
-          <h1>Utilz.eu</h1>
+          <h1><a href="/">Utilz.eu</a></h1>
           <h2>Free Utilities Online</h2>
         </header>
         <section className={scss.navbar}>

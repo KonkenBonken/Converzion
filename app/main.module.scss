@@ -20,6 +20,17 @@ body.body {
     > h1 {
       display: inline-block;
       margin-inline-start: 3ch;
+
+      > a {
+        color: inherit;
+        text-decoration: inherit;
+
+        &:hover,
+        &:active,
+        &:focus {
+          text-decoration: underline;
+        }
+      }
     }
 
     > h2 {
